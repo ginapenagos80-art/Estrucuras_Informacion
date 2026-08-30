@@ -1,49 +1,44 @@
-class animales:
-    def __init__(self, nombre, especie, edad):
+class Animal:
+    def __init__(self, codigo, nombre, raza, edad):
+        self.codigo = codigo
         self.nombre = nombre
-        self.especie = especie
+        self.raza = raza
         self.edad = edad
-        self.anterior = None
+
+    def __str__(self):
+        return f"[{self.codigo}] {self.nombre} - Raza: {self.raza}, Edad: {self.edad} años"
+
+class nodo:
+    def __init__(self, dato):
+        self.dato = dato
         self.siguiente = None
 
-class lista_animales:
+class lista:
+
     def __init__(self):
         self.primero = None
-        self.ultimo = None
 
-    def insertar(self, nombre, especie, edad):
-        nuevo = animales(nombre, especie, edad)
+    def append(self, dato):
+
+        nuevo = nodo(dato)
         if self.primero == None:
             self.primero = nuevo
-            self.ultimo = nuevo
         else:
-            nuevo.anterior = self.ultimo
-            self.ultimo.siguiente = nuevo
-            self.ultimo = nuevo
+            actual = self.primero
+            while actual.siguiente:
+                actual = actual.siguiente
+            actual.siguiente = nuevo
+            print(f"Se ha agregado el animal: {dato.nombre} con código {dato.codigo}")
 
     def mostrar(self):
         actual = self.primero
         while actual:
-            print(f"{actual.nombre}\n{actual.especie}\n{actual.edad} años")
+            print(actual.dato) 
             actual = actual.siguiente
-
-sistema = lista_animales()
-
-while True:
-    print("\nSistema de adopcion de animales")
-    print("1. Registrar animal")
-    print("2. Mostrar animales")
-    print("3. Salir")
-    opcion = input("Opción: ")
-
-    if opcion == "1":
-        nombre = input("Nombre: ")
-        especie = input("Especie: ")
-        edad = int(input("Edad: "))
-        sistema.insertar(nombre, especie, edad)
-
-    elif opcion == "2":
-        sistema.mostrar()
-
-    elif opcion == "3":
-        break
+            
+milista = lista()
+milista.append(Animal("A001", "Firulais", "Labrador", 3))
+milista.append(Animal("A002", "Michi", "Criollo", 1))
+milista.append(Animal("A003", "Rocky", "Pastor Alemán", 5))
+milista.append(Animal("A004", "Luna", "Siames", 2))
+milista.mostrar()
